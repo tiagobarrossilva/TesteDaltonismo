@@ -65,6 +65,12 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                         Toast.makeText(this, "resultado inserido", Toast.LENGTH_SHORT).show()
+                        if(! resultado.r4.equals("")){
+                            binding.apply {
+                                resultado!!.r4 = ""
+                                invalidateAll()
+                            }
+                        }
                     }
                 }
                 RESULT_CANCELED->{
@@ -92,16 +98,21 @@ class MainActivity : AppCompatActivity() {
 
         //botao para analizar o resultado
         binding.button4.setOnClickListener {
-            if(resultado.r1.equals("29") && resultado.r2.equals("74") && resultado.r3.equals("2")){
-                binding.apply {
-                    resultado!!.r4 = "você não tem daltonismo"
-                    invalidateAll()
-                }
+            if(resultado.r1.equals("?") || resultado.r2.equals("?") || resultado.r3.equals("?")){
+                Toast.makeText(this, "preencha todos os campos", Toast.LENGTH_SHORT).show()
             }
             else{
-                binding.apply {
-                    resultado!!.r4 = "você pode ter daltonismo, procure um medico"
-                    invalidateAll()
+                if(resultado.r1.equals("29") && resultado.r2.equals("74") && resultado.r3.equals("2")){
+                    binding.apply {
+                        resultado!!.r4 = "você não tem daltonismo"
+                        invalidateAll()
+                    }
+                }
+                else{
+                    binding.apply {
+                        resultado!!.r4 = "você pode ter daltonismo, procure um medico"
+                        invalidateAll()
+                    }
                 }
             }
         }
